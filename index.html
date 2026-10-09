@@ -178,6 +178,9 @@ textarea{min-height:3.4em;resize:vertical;line-height:1.5;overflow:hidden}
 .opt input{margin-top:.3rem;accent-color:var(--teal)}
 .opt b{display:block}
 .opt span{font-size:.92rem;color:var(--muted)}
+.modal-box.wide{width:min(980px,100%)}
+.vid{display:block;width:100%;aspect-ratio:16/9;border-radius:10px;background:#000}
+.vid-note{margin:8px 0 0!important;font-size:.85rem;color:var(--muted)}
 .modal-actions{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px;margin-top:16px}
 .toast{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));transform:translateX(-50%) translateY(10px);opacity:0;pointer-events:none;z-index:70;max-width:min(520px,calc(100% - 32px));background:var(--ink);color:var(--bg);padding:.65rem 1rem;border-radius:9px;font-weight:600;font-size:.93rem;box-shadow:var(--shadow);transition:opacity .2s,transform .2s}
 .noscript-note{margin:4px 0 18px;padding:14px 16px;border-radius:12px;border:1px solid var(--draft);background:var(--draft-bg);color:var(--ink)}
@@ -227,6 +230,7 @@ textarea{min-height:3.4em;resize:vertical;line-height:1.5;overflow:hidden}
     </div>
     <nav class="actions" aria-label="Aktionen">
       <button class="btn" id="btnIntro" type="button"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="10" cy="10" r="7.5"/><path d="M10 9v5M10 6.2v.1" stroke-linecap="round"/></svg>Einführung</button>
+      <button class="btn" id="btnVideo" type="button" hidden><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="10" cy="10" r="7.5"/><path d="M8.4 6.9v6.2l5-3.1z" fill="currentColor" stroke="none"/></svg>Video-Impuls</button>
       <button class="btn" id="btnSave" type="button"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M10 3v9m0 0-3.5-3.5M10 12l3.5-3.5M4 14.5V16h12v-1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Zwischenstand sichern</button>
       <button class="btn" id="btnLoad" type="button"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M10 13V4m0 0L6.5 7.5M10 4l3.5 3.5M4 14.5V16h12v-1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Zwischenstand laden</button>
       <input type="file" id="fileLoad" accept=".json,application/json" hidden>
@@ -1417,6 +1421,7 @@ const ELEMENTS = {
   var modal = $("#modal"), modalBox = $("#modalBox"), modalReturn = null;
   function showModal(title, nodes, actions) {
     modalReturn = document.activeElement;
+    modalBox.classList.remove("wide");
     modalBox.innerHTML = "";
     modalBox.appendChild(h("h2", { id: "modalTitle", text: title }));
     nodes.forEach(function (n) { modalBox.appendChild(n); });
@@ -1428,8 +1433,20 @@ const ELEMENTS = {
     modal.hidden = false;
     var f = modalBox.querySelector("input,button.primary,button"); if (f) f.focus();
   }
-  function hideModal() { modal.hidden = true; if (modalReturn && document.contains(modalReturn)) { try { modalReturn.focus(); } catch (e) {} } }
+  function hideModal() { var vv = modalBox.querySelector("video"); if (vv) { try { vv.pause(); } catch (e) {} } modal.hidden = true; if (modalReturn && document.contains(modalReturn)) { try { modalReturn.focus(); } catch (e) {} } }
   modal.addEventListener("click", function (e) { if (e.target === modal) hideModal(); });
+
+  /* ---------- Video-Impuls (nur auf der GitHub-Seite, dort liegt die Videodatei) ---------- */
+  var btnVideo = $("#btnVideo");
+  if (btnVideo && (/github\.io$/i.test(location.hostname) || /[?&]video=1\b/.test(location.search))) {
+    btnVideo.hidden = false;
+    btnVideo.addEventListener("click", function () {
+      var v = h("video", { "class": "vid", controls: true, playsinline: true, preload: "metadata", poster: "video-impuls.jpg", src: "video-impuls.mp4" });
+      showModal("Video-Impuls: Das Orientierungsmodell in gut zwei Minuten", [v, h("p", { "class": "vid-note", text: "Mit Untertiteln. Die Stimme wurde mit KI erzeugt." })], [{ label: "Schließen" }]);
+      modalBox.classList.add("wide");
+      try { var pp = v.play(); if (pp && pp.catch) pp.catch(function () {}); } catch (e) {}
+    });
+  }
   document.addEventListener("keydown", function (e) {
     if (e.key !== "Escape") return;
     if (!modal.hidden) { hideModal(); return; }
