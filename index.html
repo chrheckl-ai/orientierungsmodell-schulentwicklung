@@ -198,6 +198,9 @@ textarea{min-height:3.4em;resize:vertical;line-height:1.5;overflow:hidden}
 .role-ico svg{display:block;width:46px;height:40px;fill:var(--blue)}
 .role-title{margin:0 0 3px;font-weight:700;font-size:.92rem;color:var(--blue)}
 .role p{margin:0}
+.notice{margin:14px 0 2px;padding:10px 14px;border-radius:10px;border-left:4px solid var(--c);background:color-mix(in srgb,var(--c) 8%,var(--surface))}
+.notice-title{margin:0 0 2px;font-weight:700;font-size:.92rem;color:var(--c)}
+.notice p{margin:0}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 @media (max-width:600px){
   .top{gap:12px}
@@ -263,6 +266,7 @@ textarea{min-height:3.4em;resize:vertical;line-height:1.5;overflow:hidden}
 #diagram .vtxt{font:400 17px Arial,Helvetica,sans-serif;fill:var(--teal-ink)}
 #diagram .dots{font:400 15px Arial,Helvetica,sans-serif;fill:var(--d-muted)}
 #diagram .chev-t{font:700 11.5px Arial,Helvetica,sans-serif;fill:#fff}
+.chev-cap{font:700 9px Arial,Helvetica,sans-serif}
 #diagram .dash{stroke:var(--dash);stroke-width:.8;fill:none;stroke-dasharray:4 1.5 .5 1.5 .5 1.5}
 #diagram .hit{fill:transparent}
 #diagram .el{cursor:pointer;outline:none}
@@ -395,8 +399,8 @@ textarea{min-height:3.4em;resize:vertical;line-height:1.5;overflow:hidden}
 <g class="el sc in" data-id="rueckkopplung" tabindex="-1" role="button" aria-label="Rückkopplung statt starrer Phasen" style="--d:0.35000000000000003s;--c:var(--teal)"><g class="lift"><rect class="hit" x="83.4" y="493.9" width="28.7" height="23.9"/><use href="#mini" xlink:href="#mini" x="87.4" y="497.9" width="20.7" height="15.9" style="fill:var(--teal)"/></g></g>
 <text class="dots in" x="88.8" y="528.7" style="--d:.4s">…</text>
 <g class="el sc in" data-id="logik" tabindex="0" role="button" aria-label="Die Figur mit dem Fernglas: Sie als Digitalisierungsbeauftragte oder Digitalisierungsbeauftragter" style="--d:.45s;--c:var(--blue)"><g class="lift"><rect class="hit" x="165.4" y="370.1" width="45.9" height="39.8"/><use href="#fernglasSym" xlink:href="#fernglasSym" x="168.38" y="373.09" width="39.94" height="33.75" preserveAspectRatio="none" style="fill:var(--blue)"/></g></g>
-<g class="el in" data-id="pilotierung" tabindex="-1" role="button" aria-label="Pilotierung: Überblick" style="--d:1.05s;--c:var(--blue)"><g class="lift"><path d="M266.7 438.1 H349.1 L360.6 449.6 L349.1 461.2 H266.7 Q264.2 461.2 264.2 458.7 V440.6 Q264.2 438.1 266.7 438.1 Z" style="fill:#1F6FB2;filter:url(#dsh)"/><text class="chev-t" x="306.7" y="453.6" text-anchor="middle">Pilotierung</text></g></g>
-<g class="el in" data-id="etablierung" tabindex="-1" role="button" aria-label="Etablierung: Überblick" style="--d:1.1s;--c:var(--purple)"><g class="lift"><path d="M546.7 437.9 H629.0 L640.5 449.4 L629.0 460.9 H546.7 Q544.2 460.9 544.2 458.4 V440.4 Q544.2 437.9 546.7 437.9 Z" style="fill:#6B3FA0;filter:url(#dsh)"/><text class="chev-t" x="586.6" y="453.4" text-anchor="middle">Etablierung</text></g></g>
+<g class="el in" data-id="pilotierung" tabindex="-1" role="button" aria-label="Pilotierung (Steuerung: Digitalisierungsbeauftragte): Überblick" style="--d:1.05s;--c:var(--blue)"><g class="lift"><path d="M253.2 438.1 H362.7 L374.2 449.6 L362.7 461.2 H253.2 Q250.7 461.2 250.7 458.7 V440.6 Q250.7 438.1 253.2 438.1 Z" style="fill:#1F6FB2;filter:url(#dsh)"/><text class="chev-t" x="306.7" y="453.6" text-anchor="middle">Pilotierung</text><text class="chev-cap" x="306.7" y="472.7" text-anchor="middle" style="fill:var(--blue)">Steuerung: DiB</text></g></g>
+<g class="el in" data-id="etablierung" tabindex="-1" role="button" aria-label="Etablierung (Steuerung: Schulleitung): Überblick" style="--d:1.1s;--c:var(--purple)"><g class="lift"><path d="M533.1 437.9 H642.6 L654.1 449.4 L642.6 460.9 H533.1 Q530.6 460.9 530.6 458.4 V440.4 Q530.6 437.9 533.1 437.9 Z" style="fill:#6B3FA0;filter:url(#dsh)"/><text class="chev-t" x="586.6" y="453.4" text-anchor="middle">Etablierung</text><text class="chev-cap" x="586.6" y="472.4" text-anchor="middle" style="fill:var(--purple)">Steuerung: Schulleitung</text></g></g>
 </svg>
         </div>
         <p class="scroll-note">Tipp: Das Schaubild lässt sich seitlich verschieben. Alle Elemente finden Sie auch in der Übersicht darunter.</p>
@@ -825,6 +829,9 @@ const ORDER = ["vergewisserung", "beteiligung", "steuerung", "anstoss",
   "p-planung", "p-durchfuehrung", "p-evaluation",
   "e-planung", "e-durchfuehrung", "e-evaluation"];
 
+/* Hinweis in allen Elementen der Etablierung (Anregung des Dezernenten) */
+const ETAB_NOTICE = { draft: true, title: "Steuerung: Schulleitung", text: "Die Etablierung ist ein großer Schulentwicklungsprozess, den die Schulleitung steuert. Ihr Schwerpunkt als Digitalisierungsbeauftragte/r bleibt die Pilotierung." };
+
 const ELEMENTS = {
   intro: {
     phase: "model", kind: "info", eyebrow: "Einführung", title: "Wozu dient dieser Praxisleitfaden?", sub: "",
@@ -859,7 +866,7 @@ const ELEMENTS = {
 
   logik: {
     phase: "model", kind: "info", title: "Die Logik des Orientierungsmodells", sub: "Von ressourcenorientierter Pilotierung zu zielorientierter Etablierung",
-    role: { draft: true, text: "Die Figur mit dem Fernglas sind Sie. Als Digitalisierungsbeauftragte oder Digitalisierungsbeauftragter initiieren Sie Entwicklungsprozesse und begleiten sie, von der ersten Vergewisserung bis zur gelebten Schulpraxis." },
+    role: { draft: true, text: "Die Figur mit dem Fernglas sind Sie. Als Digitalisierungsbeauftragte oder Digitalisierungsbeauftragter initiieren Sie Entwicklungsprozesse und begleiten sie. Der Schwerpunkt Ihres Auftrags liegt auf der Orientierung und der Pilotierung. Die Etablierung ist ein großer Schulentwicklungsprozess, den die Schulleitung steuert." },
     intro: { text: "Je offener der Weg und die geeignete Lösung noch sind, desto wichtiger ist es, mit vorhandenen Personen, Kompetenzen und Möglichkeiten zu beginnen, überschaubar zu erproben, aus den Erfahrungen zu lernen und daraus abzuleiten, was für eine dauerhafte Verankerung benötigt wird." },
     aspectGroups: [
       { items: [
@@ -884,7 +891,7 @@ const ELEMENTS = {
 
   pilotierung: {
     phase: "pilot", kind: "info", title: "Pilotierung", sub: "Pilotieren und lernen",
-    role: { draft: true, text: "Sie begleiten die Pilotierung: Sie unterstützen die Pilotgruppe, halten den Kontakt zur Schulleitung und sorgen dafür, dass aus den Erfahrungen gelernt wird." },
+    role: { draft: true, text: "Hier liegt der Schwerpunkt Ihres Auftrags. Sie steuern die Pilotierung: Sie unterstützen die Pilotgruppe, halten den Kontakt zur Schulleitung und sorgen dafür, dass aus den Erfahrungen gelernt wird." },
     intro: { draft: true, text: "In der Pilotierung wird das Vorhaben in einem überschaubaren Rahmen erprobt. Leitend ist die Frage, was mit den __vorhandenen__ Mitteln und mit den Menschen möglich ist, die mitgestalten wollen. Die Erfahrungen zeigen, was trägt und was angepasst werden muss." },
     aspectGroups: [{ items: [
       { h: "Mit den vorhandenen Ressourcen planen", p: "Unter Unsicherheit mit vorhandenen Mitteln ins Handeln kommen, gemeinsam erproben und aus Erfahrungen lernen." },
@@ -895,11 +902,12 @@ const ELEMENTS = {
 
   etablierung: {
     phase: "etab", kind: "info", title: "Etablierung", sub: "Etablieren und verankern",
-    role: { draft: true, text: "Sie unterstützen den Übergang von der kleinen Pilotgruppe in die Breite der Schule und achten darauf, dass das Vorhaben dauerhaft verankert wird." },
+    notice: ETAB_NOTICE,
+    role: { draft: true, text: "Sie bringen Ihre Erfahrungen aus der Pilotierung ein und beraten die Schulleitung und die Steuergruppe. Die Verantwortung für die dauerhafte Verankerung liegt bei der Schulleitung." },
     intro: { draft: true, text: "Mit wachsender Klarheit wird das Erprobte zielgerichtet gestaltet und dauerhaft verankert. Jetzt geht es darum, was notwendig und realisierbar ist, wer dafür gebraucht wird und wie das Vorhaben Teil der gelebten Schulpraxis wird." },
     aspectGroups: [{ items: [
       { h: "Zielgerichtet gestalten", p: "Mit wachsender Klarheit kann zunehmend zielgerichtet gestaltet und verankert werden." },
-      { draft: true, h: "Der größere Kreislauf", p: "Der Kreislauf der Etablierung ist bewusst größer: Es geht nicht mehr um eine kleine Pilotgruppe, sondern um die ganze Schule. Mehr Menschen sind beteiligt, Strukturen werden verbindlicher und die Wirkung reicht weiter." }
+      { draft: true, h: "Der größere Kreislauf", p: "Der Kreislauf der Etablierung ist bewusst größer: Es geht nicht mehr um eine kleine Pilotgruppe, sondern um die ganze Schule. Mehr Menschen sind beteiligt, Strukturen werden verbindlicher und die Wirkung reicht weiter. Deshalb ist die Etablierung ein großer Schulentwicklungsprozess, den die Schulleitung steuert." }
     ] }],
     related: ["e-planung", "e-durchfuehrung", "e-evaluation"]
   },
@@ -954,7 +962,7 @@ const ELEMENTS = {
 
   steuerung: {
     phase: "orient", kind: "q", title: "Abstimmung", sub: "von Prinzipien der Steuerung",
-    role: { draft: true, text: "Klären Sie früh Ihre eigene Rolle: Koordinieren und begleiten Sie den Prozess, oder entscheiden Sie mit? Die Gesamtverantwortung liegt bei der Schulleitung. Ein klares Mandat stärkt Ihre Position und entlastet Sie." },
+    role: { draft: true, text: "Klären Sie früh Ihre eigene Rolle: Die Pilotierung steuern Sie mit einem klaren Mandat der Schulleitung. Die Gesamtverantwortung und die Steuerung der Etablierung liegen bei der Schulleitung. Ein solches Mandat stärkt Ihre Position und entlastet Sie." },
     intro: { draft: true, text: "Entwicklungsprozesse brauchen verlässliche Absprachen darüber, wie gesteuert, entschieden und kommuniziert wird. Gerade wenn der Weg noch offen ist, geben gemeinsam vereinbarte Prinzipien Sicherheit, ohne das Vorgehen im Detail festzulegen." },
     aspectGroups: [{ items: [
       { draft: true, h: "Rollen und Verantwortlichkeiten", p: "Klare Zuständigkeiten entlasten alle Beteiligten. Es sollte erkennbar sein, wer koordiniert, wer entscheidet und wer welche Aufgaben übernimmt. In vielen Schulen hat sich dafür eine Steuergruppe bewährt, in der Schulleitung und Kollegium zusammenarbeiten." },
@@ -1045,7 +1053,8 @@ const ELEMENTS = {
 
   "e-planung": {
     phase: "etab", kind: "q", title: "Planung", sub: "mit dem, was notwendig und realisierbar ist",
-    role: { draft: true, text: "Sie bringen die Erfahrungen aus der Pilotierung in die schulischen Gremien ein und achten darauf, dass das Vorhaben verbindlich verankert wird, etwa im Medienkonzept." },
+    notice: ETAB_NOTICE,
+    role: { draft: true, text: "Die Planung der Etablierung verantwortet die Schulleitung, zum Beispiel gemeinsam mit der Steuergruppe. Sie bringen die Erfahrungen aus der Pilotierung ein und beraten, wie sich das Vorhaben verbindlich verankern lässt, etwa im Medienkonzept." },
     intro: { draft: true, text: "Auf Grundlage der Erfahrungen aus der Pilotierung wird nun zielgerichtet geplant. Die Frage lautet: Was ist notwendig, damit das Vorhaben dauerhaft gelingt, und was davon lässt sich realisieren?" },
     aspectGroups: [{ items: [
       { draft: true, h: "Erkenntnisse nutzen", p: "Die Ergebnisse der Pilotierung bilden die Grundlage der Planung. Was sich bewährt hat, wird übernommen. Was nicht getragen hat, wird verändert oder verworfen." },
@@ -1059,13 +1068,15 @@ const ELEMENTS = {
       { id: "ep3", q: "Welche Kompetenzen sind notwendig?" },
       { id: "ep4", q: "Welche Expertise müssen wir uns dazuholen (z. B. Fortbildungen, Hospitationen)?" },
       { id: "ep5", q: "Welcher zeitliche Rahmen muss gesetzt werden?" },
-      { id: "ep6", added: true, q: "Wie wird das Vorhaben verbindlich verankert (z. B. im Medienkonzept, im schulinternen Lehrplan, durch Konferenzbeschluss)?" }
+      { id: "ep6", added: true, q: "Wie wird das Vorhaben verbindlich verankert (z. B. im Medienkonzept, im schulinternen Lehrplan, durch Konferenzbeschluss)?" },
+      { id: "ep7", added: true, q: "Wie steuert die Schulleitung die Etablierung, und welche Rolle übernimmt die oder der Digitalisierungsbeauftragte dabei?" }
     ] }]
   },
 
   "e-durchfuehrung": {
     phase: "etab", kind: "q", title: "Durchführung", sub: "mit denen, die gebraucht werden",
-    role: { draft: true, text: "Sie koordinieren, wie die Erfahrungen weitergegeben werden, und vermitteln Unterstützung, zum Beispiel schulinterne Fortbildungen oder Angebote der Medienberatung." },
+    notice: ETAB_NOTICE,
+    role: { draft: true, text: "Die Schulleitung setzt den Rahmen und entscheidet, wer einbezogen wird. Sie können helfen, die Erfahrungen der Pilotgruppe weiterzugeben, und auf Unterstützung hinweisen, zum Beispiel schulinterne Fortbildungen oder Angebote der Medienberatung." },
     intro: { draft: true, text: "Damit das Vorhaben in der Breite ankommt, werden nun auch diejenigen einbezogen, die für eine dauerhafte Umsetzung gebraucht werden. Die Erfahrungen der Pilotgruppe helfen dabei." },
     aspectGroups: [{ items: [
       { draft: true, h: "Vom Pilot in die Breite", p: "Die Etablierung reicht über die Freiwilligen hinaus. Beteiligt werden alle, die für die dauerhafte Umsetzung eine Rolle spielen, etwa eine ganze Fachschaft oder ein Jahrgangsteam." },
@@ -1081,7 +1092,8 @@ const ELEMENTS = {
 
   "e-evaluation": {
     phase: "etab", kind: "q", title: "Evaluation", sub: "dessen, was erreichbar ist",
-    role: { draft: true, text: "Sie behalten im Blick, ob das Vorhaben wirkt und trägt, und stoßen bei Bedarf eine neue Runde an. So schließt sich der Kreislauf." },
+    notice: ETAB_NOTICE,
+    role: { draft: true, text: "Die Evaluation der Etablierung verantwortet die Schulleitung. Sie können Ihre Beobachtungen einbringen. Ergeben sich dabei neue Ideen, können Sie diese wieder in einer kleinen Pilotierung erproben." },
     intro: { draft: true, text: "Auch die Etablierung wird regelmäßig ausgewertet. Die Evaluation prüft, ob das Vorhaben die angestrebte Wirkung entfaltet, und bildet den Ausgangspunkt für die weitere Entwicklung." },
     aspectGroups: [{ items: [
       { draft: true, h: "Wirkung prüfen", p: "Entscheidend ist, welchen Beitrag das Vorhaben zum Lehren und Lernen leistet. Rückmeldungen von Lehrkräften sowie Schülerinnen und Schülern geben dafür wichtige Hinweise." },
@@ -1245,6 +1257,11 @@ const ELEMENTS = {
     $("#pSub").textContent = e.sub || "";
     body.innerHTML = "";
 
+    if (e.notice) {
+      body.appendChild(h("div", { "class": "notice" }, [
+        h("p", { "class": "notice-title" }, [e.notice.title, e.notice.draft ? badgeDraft() : null]),
+        h("p", { text: e.notice.text })]));
+    }
     if (e.kind === "q") {
       body.appendChild(h("p", { "class": "s-label", text: "Worum geht es?" }));
     } else {
