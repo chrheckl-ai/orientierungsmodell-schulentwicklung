@@ -1451,7 +1451,7 @@ const ELEMENTS = {
         v.setAttribute("poster", V[cur].poster); v.src = V[cur].src; v.load();
         sw.textContent = cur === "neu" ? "Frühere Fassung ansehen" : "Aktuelle Fassung ansehen";
       });
-      showModal("Video-Impuls: Das Orientierungsmodell in knapp drei Minuten", [v, h("p", { "class": "vid-note" }, ["Mit Untertiteln. Die Stimme wurde mit KI erzeugt. ", sw])], [{ label: "Schließen" }]);
+      showModal("Video-Impuls: Das Orientierungsmodell in knapp drei Minuten", [v, h("p", { "class": "vid-note" }, ["Die Stimme wurde mit KI erzeugt. ", sw])], [{ label: "Schließen" }]);
       modalBox.classList.add("wide");
       try { var pp = v.play(); if (pp && pp.catch) pp.catch(function () {}); } catch (e) {}
     });
