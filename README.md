@@ -1,6 +1,6 @@
-# Orientierungsmodell für die digitalisierungsbezogene Schulentwicklung
+# Orientierungsmodell für die digitalisierungsbezogene agile Schulentwicklung
 
-Interaktiver Praxisleitfaden für Digitalisierungsbeauftragte: Schulentwicklungsprozesse initiieren und agil begleiten.
+Interaktive Seite für Digitalisierungsbeauftragte: Schulentwicklungsprozesse initiieren und agil begleiten.
 
 **Zur Seite:** https://chrheckl-ai.github.io/orientierungsmodell-schulentwicklung/
 
