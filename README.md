@@ -10,7 +10,8 @@ Interaktiver Praxisleitfaden für Digitalisierungsbeauftragte: Schulentwicklungs
 - Leitfragen direkt auf der Seite beantworten
 - Antworten als PDF ausgeben, zum Beispiel für ein Gespräch mit der Schulleitung oder der Steuergruppe
 - Zwischenstand als Datei sichern und an einem anderen Gerät wieder laden
-- Video-Impuls (gut zwei Minuten, mit Untertiteln) direkt auf der Seite ansehen: Button „Video-Impuls“
+- Video-Impuls (knapp drei Minuten, die frühere Fassung bleibt abrufbar) direkt auf der Seite ansehen: Button „Video-Impuls“
+- Begleitmaterial: Präsentation zum Orientierungsmodell (PowerPoint und PDF) und Arbeitsboard auf EduMaps: Button „Begleitmaterial“
 
 Alle Eingaben bleiben im Browser auf dem eigenen Gerät. Die Seite lädt keine Inhalte von anderen Servern nach.
 
