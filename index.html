@@ -124,6 +124,13 @@ input:focus,textarea:focus{outline:2px solid color-mix(in srgb,var(--c,var(--tea
 .panel{--c:var(--teal);position:sticky;top:16px;max-height:calc(100dvh - 32px);display:flex;flex-direction:column;min-width:0;background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);overflow:hidden}
 .p-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:16px 18px 14px;background:color-mix(in srgb,var(--c) 7%,var(--surface));border-bottom:1px solid var(--line)}
 .p-eyebrow{margin:0;font-size:.74rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--c)}
+.p-back{display:block;margin:0 0 10px;font-size:.88rem;text-align:left;line-height:1.35}
+.to-top{position:fixed;top:calc(12px + env(safe-area-inset-top,0px));left:50%;transform:translate(-50%,-8px);z-index:30;display:inline-flex;align-items:center;gap:.4rem;padding:.45rem .9rem .45rem .75rem;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--teal-ink);font:inherit;font-size:.88rem;font-weight:700;box-shadow:var(--shadow);cursor:pointer;opacity:0;visibility:hidden;transition:opacity .2s,transform .2s,visibility .2s}
+.to-top svg{width:16px;height:16px}
+.to-top.show{opacity:1;visibility:visible;transform:translate(-50%,0)}
+.to-top:hover{border-color:var(--teal)}
+.to-top:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){.to-top{transition:none}}
 .p-head h2{font-family:var(--font-display);font-weight:500;font-size:1.42rem;line-height:1.2;margin:4px 0 2px;color:var(--ink);text-wrap:balance;outline:none}
 .p-sub{margin:0;color:var(--muted);font-size:1rem}
 .icon-btn{flex:none;width:2.2rem;height:2.2rem;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--muted);cursor:pointer;display:grid;place-items:center}
@@ -433,6 +440,7 @@ textarea{min-height:3.4em;resize:vertical;line-height:1.5;overflow:hidden}
     <aside class="panel" id="panel" hidden aria-labelledby="pTitle">
       <div class="p-head">
         <div>
+          <button class="link-btn p-back" type="button" id="pBack" hidden></button>
           <p class="p-eyebrow" id="pEyebrow"></p>
           <h2 id="pTitle" tabindex="-1"></h2>
           <p class="p-sub" id="pSub"></p>
@@ -446,6 +454,7 @@ textarea{min-height:3.4em;resize:vertical;line-height:1.5;overflow:hidden}
       </div>
     </aside>
   </main>
+  <button class="to-top" id="toTop" type="button"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M10 16V4M4.5 9.5 10 4l5.5 5.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Nach oben</button>
   <div id="scrim" hidden></div>
   <div class="modal" id="modal" hidden role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal-box" id="modalBox"></div></div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -879,7 +888,7 @@ const ELEMENTS = {
 
   logik: {
     phase: "model", kind: "info", title: "Die Logik des Orientierungsmodells", sub: "Von ressourcenorientierter Pilotierung zu zielorientierter Etablierung",
-    role: { draft: true, text: "Die Figur mit dem Fernglas bist du. Als Digitalisierungsbeauftragte oder Digitalisierungsbeauftragter initiierst du Entwicklungsprozesse und begleitest sie. Der Schwerpunkt deines Auftrags liegt auf der Orientierung und der Pilotierung. Die Etablierung ist ein großer Schulentwicklungsprozess, den die Schulleitung steuert." },
+    role: { draft: true, text: "Die Figur mit dem Fernglas bist du. Als Digitalisierungsbeauftragte oder Digitalisierungsbeauftragter initiierst du Entwicklungsprozesse und begleitest sie. Der Schwerpunkt deines Auftrags liegt auf der Orientierung für deine Schulleitung und dein Kollegium und auf der Pilotierung. Die Etablierung ist ein großer Schulentwicklungsprozess, den die Schulleitung steuert." },
     intro: { text: "Je offener der Weg und die geeignete Lösung noch sind, desto wichtiger ist es, mit vorhandenen Personen, Kompetenzen und Möglichkeiten zu beginnen, überschaubar zu erproben, aus den Erfahrungen zu lernen und daraus abzuleiten, was für eine dauerhafte Verankerung benötigt wird." },
     aspectGroups: [
       { items: [
@@ -904,7 +913,7 @@ const ELEMENTS = {
 
   pilotierung: {
     phase: "pilot", kind: "info", title: "Pilotierung", sub: "Pilotieren und lernen",
-    role: { draft: true, text: "Hier liegt der Schwerpunkt deines Auftrags. Du steuerst die Pilotierung: Du unterstützt die Pilotgruppe, hältst den Kontakt zur Schulleitung und sorgst dafür, dass aus den Erfahrungen gelernt wird." },
+    role: { draft: true, text: "Hier liegt der Schwerpunkt deines Auftrags. Du steuerst die Pilotierung: Du unterstützt die Pilotgruppe, hältst die Schulleitung über den Stand der Erprobung auf dem Laufenden und sorgst dafür, dass aus den Erfahrungen gelernt wird." },
     intro: { draft: true, text: "In der Pilotierung wird das Vorhaben in einem überschaubaren Rahmen erprobt. Leitend ist die Frage, was mit den __vorhandenen__ Mitteln und mit den Menschen möglich ist, die mitgestalten wollen. Die Erfahrungen zeigen, was trägt und was angepasst werden muss." },
     aspectGroups: [{ items: [
       { h: "Mit den vorhandenen Ressourcen planen", p: "Unter Unsicherheit mit vorhandenen Mitteln ins Handeln kommen, gemeinsam erproben und aus Erfahrungen lernen." },
@@ -932,7 +941,7 @@ const ELEMENTS = {
     aspectGroups: [
       { title: "Gemeinsame Entwicklungsrichtung", items: [
         { h: "Anlass und Bedarf", p: "Wahrgenommener Handlungsbedarf bildet einen Ausgangspunkt für Schulentwicklungsprozesse. Seine Klärung hilft, den konkreten Entwicklungsanlass zu erfassen und die Ausgangssituation der Schule in den Blick zu nehmen." },
-        { h: "Pädagogische Bedeutung", p: "Digitalisierungsbezogene Schulentwicklung orientiert sich an pädagogischen Anliegen. Entscheidend ist dabei nicht der Einsatz digitaler Medien an sich, sondern ihr möglicher Beitrag zum Lehren und Lernen." },
+        { draft: true, h: "Pädagogisch-didaktische Bedeutung", p: "Digitalisierungsbezogene Schulentwicklung orientiert sich an pädagogischen und didaktischen Anliegen. Entscheidend ist dabei nicht der Einsatz digitaler Medien an sich, sondern ihr möglicher Beitrag zum Lehren und Lernen." },
         { h: "Geteilte Orientierung", p: "Ein geteiltes Verständnis der angestrebten Entwicklung schafft Orientierung für den gemeinsamen Entwicklungsprozess." }
       ] },
       { title: "Vorhandene Mittel", items: [
@@ -944,7 +953,7 @@ const ELEMENTS = {
       { title: "Gemeinsame Ziele", qs: [
         { id: "v1", q: "Wo besteht Handlungsbedarf?" },
         { id: "v2", q: "Welche Interessen liegen vor?" },
-        { id: "v3", q: "Was ist von besonderer pädagogischer Bedeutung?" },
+        { id: "v3", q: "Was ist von besonderer pädagogisch-didaktischer Bedeutung?" },
         { id: "v4", q: "Wie lautet eine erste Formulierung unserer Vision?" }
       ] },
       { title: "Vorhandene Mittel", qs: [
@@ -1068,15 +1077,17 @@ const ELEMENTS = {
     phase: "etab", kind: "q", title: "Planung", sub: "mit dem, was notwendig und realisierbar ist",
     notice: ETAB_NOTICE,
     role: { draft: true, text: "Die Planung der Etablierung verantwortet die Schulleitung, zum Beispiel gemeinsam mit der Steuergruppe. Du bringst die Erfahrungen aus der Pilotierung ein und berätst, wie sich das Vorhaben verbindlich verankern lässt, etwa im Medienkonzept." },
-    intro: { draft: true, text: "Auf Grundlage der Erfahrungen aus der Pilotierung wird nun zielgerichtet geplant. Die Frage lautet: Was ist notwendig, damit das Vorhaben dauerhaft gelingt, und was davon lässt sich realisieren?" },
+    intro: { draft: true, text: "Auf Grundlage der Erfahrungen aus der Pilotierung wird nun zielgerichtet geplant. Die Frage lautet: Was ist notwendig, damit das Vorhaben dauerhaft gelingt, und was davon lässt sich realisieren? Notwendig kann auch sein, was die Schule aufgrund von Vorgaben ohnehin umsetzen muss." },
     aspectGroups: [{ items: [
       { draft: true, h: "Erkenntnisse nutzen", p: "Die Ergebnisse der Pilotierung bilden die Grundlage der Planung. Was sich bewährt hat, wird übernommen. Was nicht getragen hat, wird verändert oder verworfen." },
       { draft: true, h: "Zielorientierung", p: "Mit wachsender Klarheit lassen sich Ziele genauer bestimmen. Die Planung richtet sich daran aus, welche Kompetenzen, Ressourcen und Strukturen für diese Ziele gebraucht werden." },
+      { draft: true, h: "Vorgaben einbeziehen", p: "„Notwendig" meint nicht nur, was das Gelingen braucht. Manches muss die Schule ohnehin umsetzen, etwa aufgrund neuer Lehrpläne oder Prüfungsordnungen. Eine Pilotierung kann dann zum Ausgangspunkt werden, um eine solche Vorgabe an der eigenen Schule umzusetzen." },
       { draft: true, h: "Verbindliche Verankerung", p: "Dauerhaft wird ein Vorhaben, wenn es in den Strukturen der Schule festgehalten ist, etwa im Medienkonzept, im schulinternen Lehrplan, in Konferenzbeschlüssen oder in der Fortbildungsplanung." },
       { draft: true, h: "Realistischer Zeitrahmen", p: "Etablierung braucht Zeit. Ein Zeitrahmen mit Zwischenschritten beugt Überforderung vor und hält den Prozess in Bewegung." }
     ] }],
     questionGroups: [{ qs: [
       { id: "ep1", q: "Welche Erkenntnisse ergeben sich aus der Evaluation und müssen berücksichtigt werden?" },
+      { id: "ep1b", added: true, q: "Welche Vorgaben muss die Schule ohnehin umsetzen (z. B. Lehrpläne, Prüfungsordnungen, Erlasse)?" },
       { id: "ep2", q: "Wie können die erprobten Ziele gemeinsam getragen werden?" },
       { id: "ep3", q: "Welche Kompetenzen sind notwendig?" },
       { id: "ep4", q: "Welche Expertise müssen wir uns dazuholen (z. B. Fortbildungen, Hospitationen)?" },
@@ -1098,6 +1109,7 @@ const ELEMENTS = {
     ] }],
     questionGroups: [{ qs: [
       { id: "ed1", q: "Für wen ist die Teilnahme sinnvoll?" },
+      { id: "ed1b", added: true, q: "Für wen ist die Teilnahme notwendig?" },
       { id: "ed2", q: "Wer bringt passende Kompetenzen und Expertise ein?" },
       { id: "ed3", added: true, q: "Wie geben wir die Erfahrungen aus der Pilotierung weiter und wie unterstützen wir neu Beteiligte?" }
     ] }]
@@ -1385,11 +1397,32 @@ const ELEMENTS = {
     });
   }
 
-  function openPanel(id, trigger) {
+  // Verlauf im Fenster: Wer von einem Element zum nächsten wechselt, kommt mit „Zurück“ wieder an dieselbe Stelle.
+  var navStack = [];
+  function updateBack() {
+    var b = $("#pBack"), top = navStack[navStack.length - 1];
+    if (!top) { b.hidden = true; return; }
+    b.textContent = "← Zurück zu „" + ELEMENTS[top.id].title + "“";
+    b.hidden = false;
+  }
+  var scrollBack = null; // Scrollposition vor dem automatischen Hochholen des Fensters
+  function calmMotion() { return !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches); }
+  function openPanel(id, trigger, opts) {
     if (!ELEMENTS[id]) return;
+    opts = opts || {};
+    var wasHidden = panel.hidden;
     if (trigger && !panel.contains(trigger)) lastTrigger = trigger;
+    if (!opts.back && !panel.hidden && current && current !== id) {
+      navStack.push({ id: current, scroll: $("#pBody").scrollTop });
+      if (navStack.length > 30) navStack.shift();
+    }
     current = id;
     renderPanel(id);
+    updateBack();
+    if (opts.scroll) {
+      var body = $("#pBody"), y = opts.scroll;
+      requestAnimationFrame(function () { requestAnimationFrame(function () { body.scrollTop = y; }); });
+    }
     panel.hidden = false;
     layout.classList.add("has-panel");
     scrim.hidden = mqWide.matches;
@@ -1398,16 +1431,51 @@ const ELEMENTS = {
     var t = $("#pTitle");
     setTimeout(function () { t.focus({ preventScroll: true }); }, 30);
     if (mqWide.matches) {
+      // Fenster nach oben holen, damit es die ganze Höhe rechts nutzt (sonst bleibt beim Öffnen oben auf der Seite nur wenig Platz zum Lesen)
       var r = panel.getBoundingClientRect();
-      if (r.top < 0 || r.top > window.innerHeight * 0.6) panel.scrollIntoView({ behavior: "smooth", block: "start" });
+      if (r.top < 0 || r.top > 24) {
+        if (wasHidden) scrollBack = window.scrollY;
+        window.scrollBy({ top: r.top - 16, behavior: calmMotion() ? "auto" : "smooth" });
+      }
     }
+    updateToTop();
   }
   function closePanel() {
     panel.hidden = true; scrim.hidden = true; layout.classList.remove("has-panel");
     current = null; setActive(null);
+    navStack = []; updateBack();
     if (lastTrigger && document.contains(lastTrigger)) { try { lastTrigger.focus({ preventScroll: true }); } catch (e) {} }
+    // Beim Schließen dorthin zurück, wo du vor dem Öffnen warst
+    if (scrollBack !== null && mqWide.matches) window.scrollTo({ top: scrollBack, behavior: calmMotion() ? "auto" : "smooth" });
+    scrollBack = null;
+    updateToTop();
   }
+
+  // Knopf „Nach oben“: erscheint, sobald der Kopfbereich aus dem Bild gescrollt ist
+  var toTop = $("#toTop"), topHeader = $("header.top");
+  function updateToTop() {
+    if (!toTop || !topHeader) return;
+    var show = topHeader.getBoundingClientRect().bottom < 0 && (mqWide.matches || panel.hidden);
+    toTop.classList.toggle("show", show);
+    if (mqWide.matches && !panel.hidden) {
+      var w = $(".work").getBoundingClientRect();
+      toTop.style.left = Math.round(w.left + w.width / 2) + "px";
+    } else {
+      toTop.style.left = "";
+    }
+  }
+  window.addEventListener("scroll", updateToTop, { passive: true });
+  window.addEventListener("resize", updateToTop);
+  toTop.addEventListener("click", function () {
+    scrollBack = null;
+    window.scrollTo({ top: 0, behavior: calmMotion() ? "auto" : "smooth" });
+    try { $("#btnIntro").focus({ preventScroll: true }); } catch (e) {}
+  });
   $("#pClose").addEventListener("click", closePanel);
+  $("#pBack").addEventListener("click", function () {
+    var s = navStack.pop();
+    if (s) openPanel(s.id, null, { back: true, scroll: s.scroll });
+  });
   scrim.addEventListener("click", closePanel);
   mqWide.addEventListener ? mqWide.addEventListener("change", function () { if (!panel.hidden) scrim.hidden = mqWide.matches; }) : null;
 
