@@ -1566,10 +1566,10 @@ const ELEMENTS = {
   var btnKi = $("#btnKi");
   if (btnKi) btnKi.addEventListener("click", function () {
     showModal("KI-Assistent Medienkonzept", [
-      h("p", { text: "Dieser KI-Assistent unterstützt dich dabei, das Medienkonzept deiner Schule weiterzuentwickeln. Er läuft auf AIS.Chat." }),
+      h("p", { text: "Dieser KI-Assistent unterstützt dich dabei, das Medienkonzept deiner Schule weiterzuentwickeln. Er läuft auf AIS.Chat. Du findest den Assistenten auch unter KI-Assistenten in der Rubrik „offiziell“." }),
       h("div", { "class": "notice ki-login", role: "note" }, [
         h("p", { "class": "notice-title", text: "Nur mit Anmeldung bei AIS.Chat" }),
-        h("p", { text: "Melde dich zuerst bei AIS.Chat an und klicke erst danach auf „Assistent öffnen“." })
+        h("p", { text: "Damit der Link dich zu dem Assistenten führt, musst du bei AIS.Chat angemeldet sein." })
       ]),
       h("div", { "class": "mat-links" }, [
         h("a", { "class": "btn primary", href: KI_URL, target: "_blank", rel: "noopener", text: "Assistent öffnen" })
