@@ -1561,15 +1561,15 @@ const ELEMENTS = {
     ], [{ label: "Schließen" }]);
     modalBox.classList.add("medium");
   });
-  /* ---------- KI-Assistent Medienkonzept (AIS.Chat, nur mit Anmeldung erreichbar) ---------- */
+  /* ---------- KI-Assistent Medienkonzept (AIS.chat, nur mit Anmeldung erreichbar) ---------- */
   var KI_URL = "https://app.ais-chat.schule/assistants/0db7e79f-133a-420f-af63-d0cc8ac0ad68";
   var btnKi = $("#btnKi");
   if (btnKi) btnKi.addEventListener("click", function () {
     showModal("KI-Assistent Medienkonzept", [
-      h("p", { text: "Dieser KI-Assistent unterstützt dich dabei, das Medienkonzept deiner Schule weiterzuentwickeln. Er läuft auf AIS.Chat. Du findest den Assistenten auch unter KI-Assistenten in der Rubrik „offiziell“." }),
+      h("p", { text: "Dieser KI-Assistent unterstützt dich dabei, das Medienkonzept deiner Schule weiterzuentwickeln. Er läuft auf AIS.chat. Du findest den Assistenten auch unter KI-Assistenten in der Rubrik „offiziell“." }),
       h("div", { "class": "notice ki-login", role: "note" }, [
-        h("p", { "class": "notice-title", text: "Nur mit Anmeldung bei AIS.Chat" }),
-        h("p", { text: "Damit der Link dich zu dem Assistenten führt, musst du bei AIS.Chat angemeldet sein." })
+        h("p", { "class": "notice-title", text: "Nur mit Anmeldung bei AIS.chat" }),
+        h("p", { text: "Damit der Link dich zu dem Assistenten führt, musst du bei AIS.chat angemeldet sein." })
       ]),
       h("div", { "class": "mat-links" }, [
         h("a", { "class": "btn primary", href: KI_URL, target: "_blank", rel: "noopener", text: "Assistent öffnen" })
