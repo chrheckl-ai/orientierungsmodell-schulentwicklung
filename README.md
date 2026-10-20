@@ -18,3 +18,7 @@ Alle Eingaben bleiben im Browser auf dem eigenen Gerät. Die Seite lädt keine I
 ## Grundlage
 
 Begleitmaterial der AG Schulentwicklung (Handout, Stand 20.09.2026) und Leitfragen aus der EduMap. Arbeitsstand Oktober 2026. Mit „Entwurf“ markierte Texte sind noch nicht von der AG abgestimmt, mit „ergänzt“ markierte Leitfragen wurden gegenüber der EduMap ergänzt.
+
+## Bauquellen
+
+Die Seite wird aus den Dateien im Ordner `build/` erzeugt. Anleitung: [build/README.md](build/README.md)
