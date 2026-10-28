@@ -721,6 +721,7 @@ textarea{min-height:3.4em;resize:vertical;line-height:1.5;overflow:hidden}
   var MAT_BASE = "https://chrheckl-ai.github.io/orientierungsmodell-schulentwicklung/";
   /* KI-Assistent zum Orientierungsmodell (AIS.chat, nur mit Anmeldung erreichbar) */
   var BOT_URL = "https://app.ais-chat.schule/assistants/766be7ef-b748-4dd4-852f-c79de5865048";
+  var AIS_LOGIN_URL = "https://nrw.ais.schule/login";
   function aisLoginNotice() {
     return h("div", { "class": "notice ki-login", role: "note" }, [
       h("p", { "class": "notice-title", text: "Nur mit Anmeldung bei AIS.chat" }),
@@ -736,8 +737,11 @@ textarea{min-height:3.4em;resize:vertical;line-height:1.5;overflow:hidden}
           h("h3", { text: "KI-Assistent „Digitale Schulentwicklung agil begleiten“" }),
           h("p", { text: "Arbeitet nach der Logik dieses Orientierungsmodells. Er begleitet dich dabei, ein Vorhaben an deiner Schule anzustoßen, mit dem Vorhandenen zu erproben und Bewährtes zu verankern. Er fragt erst nach und schlägt dann einen kleinen nächsten Schritt vor. Er läuft auf AIS.chat." }),
           aisLoginNotice(),
-          h("div", { "class": "mat-links" }, [h("a", { "class": "btn primary", href: BOT_URL, target: "_blank", rel: "noopener", text: "Assistent öffnen" })]),
-          h("p", { "class": "ki-note", text: "Der Assistent öffnet sich in einem neuen Tab. Diese Seite und deine Eingaben bleiben geöffnet." })
+          h("div", { "class": "mat-links" }, [
+            h("a", { "class": "btn", href: AIS_LOGIN_URL, target: "_blank", rel: "noopener", text: "1. Bei AIS.chat anmelden" }),
+            h("a", { "class": "btn primary", href: BOT_URL, target: "_blank", rel: "noopener", text: "2. Assistent öffnen" })
+          ]),
+          h("p", { "class": "ki-note", text: "Beides öffnet sich in einem neuen Tab. Diese Seite und deine Eingaben bleiben geöffnet." })
         ]),
         h("section", { "class": "mat-card" }, [
           h("h3", { text: "Präsentation zum Orientierungsmodell" }),
