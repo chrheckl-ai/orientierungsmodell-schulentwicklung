@@ -103,7 +103,7 @@ const ELEMENTS = {
     intro: { text: "Bevor eine Erprobung beginnt, braucht es eine gemeinsame Orientierung darüber, was weiterentwickelt werden soll und woran dabei angeknüpft werden kann." },
     aspectGroups: [
       { title: "Gemeinsame Entwicklungsrichtung", items: [
-        { h: "Anlass und Bedarf", p: "Wahrgenommener Handlungsbedarf bildet einen Ausgangspunkt für Schulentwicklungsprozesse. Seine Klärung hilft, den konkreten Entwicklungsanlass zu erfassen und die Ausgangssituation der Schule in den Blick zu nehmen." },
+        { h: "Anlass und Bedarf", p: "Oft setzt ein wahrgenommener Handlungsbedarf die Entwicklung in Gang. Wer genauer hinschaut, erkennt den konkreten Anlass und die Ausgangslage der Schule." },
         { draft: true, h: "Pädagogisch-didaktische Bedeutung", p: "Digitalisierungsbezogene Schulentwicklung orientiert sich an pädagogischen und didaktischen Anliegen. Entscheidend ist dabei nicht der Einsatz digitaler Medien an sich, sondern ihr möglicher Beitrag zum Lehren und Lernen." },
         { h: "Geteilte Orientierung", p: "Ein geteiltes Verständnis der angestrebten Entwicklung schafft Orientierung für den gemeinsamen Entwicklungsprozess." }
       ] },
@@ -128,10 +128,10 @@ const ELEMENTS = {
 
   beteiligung: {
     phase: "orient", kind: "q", title: "Klärung", sub: "der Kreise der Beteiligung",
-    role: { draft: true, text: "Du hast meist einen guten Überblick, wer im Kollegium Interesse und Expertise mitbringt. Nutze die Leitfragen, um Mitstreiterinnen und Mitstreiter zu gewinnen und zu klären, wer in welcher Form beteiligt wird. Oft sind Digitalisierungsbeauftragte selbst die Change Agents, die den Prozess vorantreiben." },
+    role: { draft: true, text: "Du hast meist einen guten Überblick, wer im Kollegium Interesse und Expertise mitbringt. Nutze die Leitfragen, um Mitstreiterinnen und Mitstreiter zu gewinnen und zu klären, wer in welcher Form beteiligt wird. Oft treibst du den Prozess selbst voran und agierst damit als „Change Agent“." },
     intro: { text: "Schulentwicklung braucht Beteiligung. Dabei geht es nicht nur darum, wer beteiligt wird, sondern auch darum, welche Perspektiven und Beiträge benötigt werden und unter welchen Bedingungen Menschen bereit sind, mitzuwirken." },
     aspectGroups: [{ items: [
-      { h: "Relevante Perspektiven", p: "Die Berücksichtigung unterschiedlicher Perspektiven ermöglicht es, verschiedene Sichtweisen und Betroffenheiten in den Entwicklungsprozess einzubeziehen." },
+      { h: "Relevante Perspektiven", p: "Unterschiedliche Perspektiven einzubeziehen heißt auch zu klären, wen die Entwicklung betrifft und wie." },
       { h: "Formen der Beteiligung", p: "Beteiligung kann unterschiedlich weit reichen: von Information und Rückmeldung bis hin zu Mitbestimmung und aktiver Mitgestaltung. Damit können Personen und Gruppen in unterschiedlicher Weise in Entwicklungsprozesse einbezogen sein." },
       { h: "Motivation", p: "Motivation ist eine wichtige Voraussetzung für Beteiligung. Zugleich lässt sie sich stärken, wenn Beteiligung gut gestaltet ist. Bedeutsamkeit, Kompetenzerleben, Autonomie, Mitbestimmung und Wirksamkeitserleben spielen dabei eine wichtige Rolle." },
       { h: "Bereitschaft zur Beteiligung und Erprobung", p: "Wer freiwillig mitmacht und mitgestalten kann, engagiert sich eher. Interesse und die Bereitschaft, sich auf Neues einzulassen, erleichtern den Einstieg." },
