@@ -50,3 +50,12 @@ node build/tools/wissensdokument.js build/content.js out/Orientierungsmodell_Wis
 ```
 
 Ergebnis: `out/Orientierungsmodell_Wissensdokument.pdf` (und `.html`). Danach in AIS.chat im Hintergrundwissen des Assistenten austauschen.
+
+## Sicherheit
+
+GitHub Pages erlaubt keine eigenen HTTP-Header. `build2.py` setzt deshalb beim Bauen zwei Meta-Tags in den Kopf der Seite:
+
+- **Content Security Policy:** Die Seite darf nur ihre eigenen Inline-Skripte ausführen (per SHA-256-Hash freigegeben, die Hashes werden bei jedem Build neu berechnet). Bilder und Videos nur von der eigenen Adresse, Schriften nur eingebettet, keine Verbindungen zu fremden Servern, keine Formulare, keine Plugins.
+- **Referrer Policy `no-referrer`:** Beim Klick auf externe Links (AIS.chat, EduMaps) wird nicht übermittelt, von welcher Seite man kommt.
+
+Wer ein neues Skript von außen einbindet, muss die Richtlinie in `build2.py` erweitern, sonst blockiert der Browser es.

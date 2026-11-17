@@ -25,5 +25,15 @@ body = page.replace('<!--__JSPDF__-->', '<script>' + lib + '</script>')
 head, rest = body.split('</style>', 1)
 full = ('<!doctype html>\n<html lang="de">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">\n'
         + head + '</style>\n</head>\n<body>\n' + rest + '\n</body>\n</html>\n')
+# Sicherheit: Content Security Policy und Referrer Policy als Meta-Tags (GitHub Pages erlaubt keine eigenen HTTP-Header).
+# Inline-Skripte werden per SHA-256-Hash freigegeben, alles andere bleibt auf die eigene Seite beschraenkt.
+import hashlib, re
+hashes = ["'sha256-" + base64.b64encode(hashlib.sha256(m.encode('utf-8')).digest()).decode() + "'"
+          for m in re.findall(r'<script>(.*?)</script>', full, re.S)]
+csp = ("default-src 'none'; script-src " + ' '.join(hashes) + "; style-src 'unsafe-inline'; "
+       "img-src 'self' data: blob:; font-src data:; media-src 'self'; connect-src 'none'; "
+       "object-src 'none'; base-uri 'none'; form-action 'none'")
+full = full.replace('<meta name="viewport"', '<meta http-equiv="Content-Security-Policy" content="' + csp + '">\n'
+                    '<meta name="referrer" content="no-referrer">\n<meta name="viewport"', 1)
 open(os.path.join(OUT, 'Orientierungsmodell_Schulentwicklung_V2' + ('_' + SUFFIX if SUFFIX else '') + '.html'), 'w').write(full)
 print('artifact', len(art)//1024, 'KB; standalone', len(full)//1024, 'KB')
